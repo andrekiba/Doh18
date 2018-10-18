@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
+using Microsoft.AppCenter.Push;
 using UIKit;
 
 namespace Doh18.iOS
@@ -27,6 +24,12 @@ namespace Doh18.iOS
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, System.Action<UIBackgroundFetchResult> completionHandler)
+        {
+            var result = Push.DidReceiveRemoteNotification(userInfo);
+            completionHandler?.Invoke(result ? UIBackgroundFetchResult.NewData : UIBackgroundFetchResult.NoData);
         }
     }
 }

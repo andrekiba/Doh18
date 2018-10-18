@@ -1,11 +1,10 @@
-﻿using System;
-
+﻿using Acr.UserDialogs;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Doh18.Base;
+using Microsoft.AppCenter.Push;
 
 namespace Doh18.Droid
 {
@@ -18,8 +17,25 @@ namespace Doh18.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+
+            UserDialogs.Init(this);
+
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+
+            #region App Center
+
+            //Push.SetSenderId(Constants.FirebaseSenderId);
+
+            #endregion
+
             LoadApplication(new App());
+        }
+
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+            Push.CheckLaunchedFromNotification(this, intent);
         }
     }
 }

@@ -2,8 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
-using Doh18.Base;
 using Doh18.Pages;
+using Doh18.ViewModels;
+using FreshMvvm;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
@@ -11,6 +12,7 @@ using Microsoft.AppCenter.Distribute;
 using Microsoft.AppCenter.Push;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Constants = Doh18.Base.Constants;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Doh18
@@ -23,7 +25,11 @@ namespace Doh18
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            var mainPage = FreshPageModelResolver.ResolvePageModel<MainViewModel>();
+            var mainContainer = new FreshNavigationContainer(mainPage, "MainContainer");
+
+            MainPage = mainContainer;
+
         }
 
         protected override void OnStart()
@@ -75,6 +81,11 @@ namespace Doh18
         #endregion 
 
         #region Methods
+
+        private static void SetupIoc()
+        {
+            FreshTinyIOCBuiltIn.Current.Register<MainViewModel>();
+        }
 
         #region App Center
 
