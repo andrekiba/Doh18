@@ -10,6 +10,12 @@ namespace Doh18.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        #region Properties
+
+        public string CiaoText { get; set; }
+
+        #endregion 
+
         #region Lifecycle
         public MainViewModel()
         {
@@ -21,9 +27,10 @@ namespace Doh18.ViewModels
         #region Commands
 
         private ICommand sayCiaoCommand;
-        public ICommand SayCiaoCommand => sayCiaoCommand ?? (sayCiaoCommand = new Command(async () =>
+        public ICommand SayCiaoCommand => sayCiaoCommand ?? (sayCiaoCommand = new Command(() =>
         {
-            await UserDialogs.Instance.AlertAsync("Ciao!", null, "OK");
+            //await UserDialogs.Instance.AlertAsync("Ciao!", null, "OK");
+            CiaoText = "Ciao!";
         }));
 
         private ICommand trackEventCommand;

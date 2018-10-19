@@ -5,12 +5,19 @@
              Title="Welcome">
     <StackLayout Spacing="60" Padding="30,50,30,30" VerticalOptions="StartAndExpand">
         <Image Source="doh18" Aspect="AspectFit" Scale="1.8"/>
-        <Label Text="Welcome to DOH18!! :-)" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="Large"/>
+        <Label AutomationId="WelcomeLabel"
+               Text="Welcome to DOH18!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="Large"/>
         <StackLayout Spacing="15">
-            <Button Text="Say ciao!" Command="{Binding SayCiaoCommand}" BackgroundColor="{StaticResource LightBlue}" Style="{StaticResource BaseButtonStyle}" />
-            <Button Text="Track event" Command="{Binding TrackEventCommand}" BackgroundColor="{StaticResource Teal}" Style="{StaticResource BaseButtonStyle}" />
-            <Button Text="Handle me!" Command="{Binding HandleCommand}" BackgroundColor="{StaticResource Indigo}" Style="{StaticResource BaseButtonStyle}" />
-            <Button Text="Crash!" Command="{Binding CrashCommand}" BackgroundColor="{StaticResource Pink}" Style="{StaticResource BaseButtonStyle}" />
+            <Button AutomationId="SayCiaoButton"
+                    Text="Say ciao!" Command="{Binding SayCiaoCommand}" BackgroundColor="{StaticResource LightBlue}" Style="{StaticResource BaseButtonStyle}" />
+            <Label AutomationId="CiaoLabel" Text="{Binding CiaoText}"
+                   HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="Large"/>
+            <Button AutomationId="TrackEventButton"
+                    Text="Track event" Command="{Binding TrackEventCommand}" BackgroundColor="{StaticResource Teal}" Style="{StaticResource BaseButtonStyle}" />
+            <Button AutomationId="HandleButton"
+                    Text="Handle me!" Command="{Binding HandleCommand}" BackgroundColor="{StaticResource Indigo}" Style="{StaticResource BaseButtonStyle}" />
+            <Button AutomationId="CrashButton"
+                    Text="Crash!" Command="{Binding CrashCommand}" BackgroundColor="{StaticResource Pink}" Style="{StaticResource BaseButtonStyle}" />
         </StackLayout>
     </StackLayout>
 </ContentPage>

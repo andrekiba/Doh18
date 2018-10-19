@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using Xamarin.UITest;
@@ -8,11 +7,11 @@ using Xamarin.UITest.Queries;
 namespace Doh18.UITests
 {
     [TestFixture(Platform.Android)]
-    [TestFixture(Platform.iOS)]
+    //[TestFixture(Platform.iOS)]
     public class Tests
     {
-        IApp app;
-        Platform platform;
+        private IApp app;
+        private readonly Platform platform;
 
         public Tests(Platform platform)
         {
@@ -28,8 +27,39 @@ namespace Doh18.UITests
         [Test]
         public void WelcomeTextIsDisplayed()
         {
-            AppResult[] results = app.WaitForElement(c => c.Marked("Welcome to Xamarin.Forms!"));
-            app.Screenshot("Welcome screen.");
+            //app.Query("WelcomeLabel");
+            //app.Query(x => x.Marked("WelcomeLabel");
+            var results = app.WaitForElement(x => x.Marked("WelcomeLabel").Text("Welcome to DOH18!"));
+            app.Screenshot("Welcome screen");
+
+            Assert.IsTrue(results.Any(), "Welcome label not found");
+        }
+
+        [Test]
+        public void SayCiaoButtonTapped()
+        {
+            AppQuery ButtonQuery(AppQuery x) => x.Marked("SayCiaoButton");
+            AppQuery LabelQuery(AppQuery x) => x.Marked("CiaoLabel").Text("Ciao!");
+
+            var buttonResult = app.WaitForElement((Func<AppQuery, AppQuery>) ButtonQuery);
+
+            Assert.IsTrue(buttonResult.Any());
+
+            app.Tap((Func<AppQuery, AppQuery>) ButtonQuery);
+
+            var labelResult = app.WaitForElement((Func<AppQuery, AppQuery>)LabelQuery);
+
+            app.Screenshot("Welcome screen");
+
+            Assert.IsTrue(labelResult.Any());
+        }
+
+        [Test]
+        public void TrackEventButtonTapped()
+        {
+            app.Tap(x => x.Button("SayCiaoButton"));
+            var results = app.WaitForElement(c => c.Marked("Welcome to DOH18!"));
+            app.Screenshot("Welcome screen");
 
             Assert.IsTrue(results.Any());
         }

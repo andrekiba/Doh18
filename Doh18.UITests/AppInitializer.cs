@@ -10,10 +10,17 @@ namespace Doh18.UITests
         {
             if (platform == Platform.Android)
             {
-                return ConfigureApp.Android.StartApp();
+                return ConfigureApp
+                    .Android
+                    .EnableLocalScreenshots()
+                    .ApkFile(@"C:\Users\andrea.ceroni\Desktop\net.elfo.doh18.apk")
+                    .StartApp();
             }
 
-            return ConfigureApp.iOS.StartApp();
+            return ConfigureApp
+                .iOS
+                //.InstalledApp("bundleId")
+                .StartApp();
         }
     }
 }
