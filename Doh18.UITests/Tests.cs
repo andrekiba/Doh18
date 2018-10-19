@@ -7,7 +7,7 @@ using Xamarin.UITest.Queries;
 namespace Doh18.UITests
 {
     [TestFixture(Platform.Android)]
-    //[TestFixture(Platform.iOS)]
+    [TestFixture(Platform.iOS)]
     public class Tests
     {
         private IApp app;
@@ -52,16 +52,6 @@ namespace Doh18.UITests
             app.Screenshot("Welcome screen");
 
             Assert.IsTrue(labelResult.Any());
-        }
-
-        [Test]
-        public void TrackEventButtonTapped()
-        {
-            app.Tap(x => x.Button("SayCiaoButton"));
-            var results = app.WaitForElement(c => c.Marked("Welcome to DOH18!"));
-            app.Screenshot("Welcome screen");
-
-            Assert.IsTrue(results.Any());
         }
     }
 }

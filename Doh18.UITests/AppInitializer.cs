@@ -13,7 +13,7 @@ namespace Doh18.UITests
                 return ConfigureApp
                     .Android
                     .EnableLocalScreenshots()
-                    .ApkFile(@"C:\Users\andrea.ceroni\Desktop\net.elfo.doh18.apk")
+                    //.ApkFile(@"C:\Users\andrea.ceroni\Desktop\net.elfo.doh18.apk")
                     .StartApp();
             }
 
