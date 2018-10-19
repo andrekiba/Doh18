@@ -20,7 +20,7 @@ namespace Doh18.Helpers
 
         public string Email
         {
-            get => AppSettings.GetValueOrDefault(nameof(Email), "andrea.ceroni@elfo.net");
+            get => AppSettings.GetValueOrDefault(nameof(Email), null);
             set
             {
                 if (AppSettings.AddOrUpdateValue(nameof(Email), value))
