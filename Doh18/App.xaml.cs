@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
-using Doh18.Pages;
 using Doh18.ViewModels;
 using FreshMvvm;
 using Microsoft.AppCenter;

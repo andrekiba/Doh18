@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doh18.iOS", "Doh18.iOS\Doh1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doh18.UITests", "Doh18.UITests\Doh18.UITests.csproj", "{B19C892E-2628-4CA7-AD27-08D406A3B14B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doh18", "Doh18\Doh18.csproj", "{C170A1A8-5D86-4FE5-B9B9-AB17CDDBB1EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doh18", "Doh18\Doh18.csproj", "{C170A1A8-5D86-4FE5-B9B9-AB17CDDBB1EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

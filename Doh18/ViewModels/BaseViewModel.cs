@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Doh18.Base;
 using FreshMvvm;
 using PropertyChanged;
-using Constants = Doh18.Base.Constants;
 
 namespace Doh18.ViewModels
 {
@@ -23,14 +22,14 @@ namespace Doh18.ViewModels
 
         public BaseViewModel()
         {
-            
+
         }
 
         #endregion
 
         #region Methods
 
-        protected async Task<bool> Do(Func<Task> func, Func<string, Task> onError = null, string loadingMessage = null, string caller = null)
+        protected async Task<bool> Do(Func<Task> func, Func<string, Task> onError = null, string loadingMessage = null, [CallerMemberName]string caller = "")
         {
             string error = null;
             Exception ex = null;
@@ -50,7 +49,7 @@ namespace Doh18.ViewModels
             {
                 ex = e;
                 error = "Time out!";
-            }        
+            }
             catch (Exception e)
             {
                 ex = e;
@@ -66,10 +65,7 @@ namespace Doh18.ViewModels
             if (ex == null)
                 return true;
 
-            Ach.TrackError(ex, new Dictionary<string, string>
-            {
-                { Constants.Where, $"{GetType().Name}: {caller ?? "unknown"}" }
-            });
+            ex.TrackError(null, caller);
 
             if (onError != null)
                 await onError(error);
@@ -77,7 +73,7 @@ namespace Doh18.ViewModels
             return false;
         }
 
-        protected async Task<Result> Do(Func<Task<Result>> func, string loadingMessage = null, string caller = null)
+        protected async Task<Result> Do(Func<Task<Result>> func, string loadingMessage = null, [CallerMemberName]string caller = "")
         {
             string error = null;
             Exception ex = null;
@@ -98,7 +94,7 @@ namespace Doh18.ViewModels
             {
                 ex = e;
                 error = "Time out!";
-            }           
+            }
             catch (Exception e)
             {
                 ex = e;
@@ -114,15 +110,12 @@ namespace Doh18.ViewModels
             if (ex == null)
                 return result.IsFailure ? Result.Fail(result.Error) : result;
 
-            Ach.TrackError(ex, new Dictionary<string, string>
-            {
-                { Constants.Where, $"{GetType().Name}: {caller ?? "unknown"}" }
-            });
+            ex.TrackError(null, caller);
 
             return Result.Fail(error);
         }
 
-        protected async Task<Result<T>> Do<T>(Func<Task<Result<T>>> func, string loadingMessage = null, string caller = null)
+        protected async Task<Result<T>> Do<T>(Func<Task<Result<T>>> func, string loadingMessage = null, [CallerMemberName]string caller = "")
         {
             string error = null;
             Exception ex = null;
@@ -143,7 +136,7 @@ namespace Doh18.ViewModels
             {
                 ex = e;
                 error = "Time out";
-            }            
+            }
             catch (Exception e)
             {
                 ex = e;
@@ -159,10 +152,7 @@ namespace Doh18.ViewModels
             if (ex == null)
                 return result.IsFailure ? Result.Fail<T>(result.Error) : result;
 
-            Ach.TrackError(ex, new Dictionary<string, string>
-            {
-                { Constants.Where, $"{GetType().Name}: {caller ?? "unknown"}" }
-            });
+            ex.TrackError(null, caller);
 
             return Result.Fail<T>(error);
         }

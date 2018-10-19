@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
-using Acr.UserDialogs;
 using Doh18.Base;
 using Xamarin.Forms;
 
@@ -19,7 +16,7 @@ namespace Doh18.ViewModels
         #region Lifecycle
         public MainViewModel()
         {
-            
+
         }
 
         #endregion
@@ -36,7 +33,7 @@ namespace Doh18.ViewModels
         private ICommand trackEventCommand;
         public ICommand TrackEventCommand => trackEventCommand ?? (trackEventCommand = new Command(() =>
         {
-            "Button clicked!".TrackEvent();
+            "Track event button clicked!".TrackEvent();
         }));
 
         private ICommand handleCommand;
