@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using Microsoft.AppCenter.Distribute;
 using Microsoft.AppCenter.Push;
 using UIKit;
 
@@ -19,6 +20,10 @@ namespace Doh18.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            #region App Center
+            Distribute.DontCheckForUpdatesInDebug();
+            #endregion
+
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 

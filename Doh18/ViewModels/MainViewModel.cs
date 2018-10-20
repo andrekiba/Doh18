@@ -7,6 +7,8 @@ namespace Doh18.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        private int ciaoCounter = 0;
+
         #region Properties
 
         public string CiaoText { get; set; }
@@ -27,7 +29,7 @@ namespace Doh18.ViewModels
         public ICommand SayCiaoCommand => sayCiaoCommand ?? (sayCiaoCommand = new Command(() =>
         {
             //await UserDialogs.Instance.AlertAsync("Ciao!", null, "OK");
-            CiaoText = "Ciao!";
+            CiaoText = $"Ciao {ciaoCounter++}!";
         }));
 
         private ICommand trackEventCommand;
