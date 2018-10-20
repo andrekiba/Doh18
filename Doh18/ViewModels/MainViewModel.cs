@@ -16,9 +16,12 @@ namespace Doh18.ViewModels
         #endregion 
 
         #region Lifecycle
-        public MainViewModel()
-        {
 
+        protected override async void ViewIsAppearing(object sender, EventArgs e)
+        {
+            base.ViewIsAppearing(sender, e);
+
+            await App.Instance.CheckUpdates();
         }
 
         #endregion

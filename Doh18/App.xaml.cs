@@ -18,17 +18,23 @@ namespace Doh18
 {
     public partial class App : Application
     {
+        #region Properties
+        public static App Instance { get; private set; }
+
+        #endregion
+
         #region Lifecycle
 
         public App()
         {
             InitializeComponent();
 
+            Instance = this;
+
             var mainPage = FreshPageModelResolver.ResolvePageModel<MainViewModel>();
             var mainContainer = new FreshNavigationContainer(mainPage, "MainContainer");
 
             MainPage = mainContainer;
-
         }
 
         protected override void OnStart()
@@ -60,8 +66,13 @@ namespace Doh18
                 };
             }
 
+#if ENABLE_TEST_CLOUD
+            //TODO: disable Distribute and Push for UI Test
+            AppCenter.Start($"ios={Constants.AppCenterIos};android={Constants.AppCenterAndroid}", typeof(Analytics), typeof(Crashes));
+#else
             AppCenter.Start($"ios={Constants.AppCenterIos};android={Constants.AppCenterAndroid}",
                 typeof(Analytics), typeof(Crashes), typeof(Distribute), typeof(Push));
+#endif
 
             #endregion
 
