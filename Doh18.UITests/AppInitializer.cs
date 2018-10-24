@@ -2,7 +2,7 @@
 
 namespace Doh18.UITests
 {
-    public class AppInitializer
+    public static class AppInitializer
     {
         public static IApp StartApp(Platform platform)
         {
@@ -17,6 +17,7 @@ namespace Doh18.UITests
 
             return ConfigureApp
                 .iOS
+                .EnableLocalScreenshots()
                 //.InstalledApp("bundleId")
                 .StartApp();
         }
